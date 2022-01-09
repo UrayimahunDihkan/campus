@@ -1,0 +1,32 @@
+{
+  "button":[
+    {
+      "name":"租房新闻",
+      "sub_button":[
+        {
+          "type":"view",
+          "name":"联系小帮手",
+          "url":"https://news.qq.com/"
+        },
+        {
+          "type":"view",
+          "name":"待定",
+          "url":"https://news.163.com/"
+        },
+        {
+          "type":"view",
+          "name":"本站声明",
+          "url":"https://www.baidu.com/index.php?tn=monline_3_dg"
+        }]
+    },
+    {
+      "type":"投递资料",
+      "name":"我的海报",
+      "key":"get-post"
+    },
+    {
+      "name":"单身墙",
+      "type":"view",
+      "url":"http://4ayuih.natappfree.cc/index.html"
+    }]
+}

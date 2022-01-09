@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+
+    <title>找房无忧-租房详情页</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/rentalList.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js?nn=54573" rel="script" type="text/javascript"></script>
+    <script src="js/public.js" rel="script" type="text/javascript"></script>
+</head>
+<body>
+<!--头部-->
+<header>
+    <h1><a href="#"><img src="image/index/logo.jpg" alt=""/></a></h1>
+    <div class="icon">
+        <a href="my.html"><img src="image/index/my.jpg" alt=""/></a>
+    </div>
+</header>
+<!--大图-->
+<section class="rentalAddr">
+    <p><strong>首页</strong> > <span>北京卖房</span> > <span>房源信息</span></p>
+</section>
+<!--banner和主要房源信息-->
+<section class="rentalpart1">
+    <div class="banner">
+        <a href="#"><img class="img" id="imgSrc" src="" alt=""/></a>
+        <div class="share"><span>分享</span></div>
+    </div>
+    <div class="mianText">
+        <h2 id="title"></h2>
+        <a onclick="attention()">关注</a>
+    </div>
+    <ul class="houseMes1">
+        <li>
+            <div>均价</div>
+            <div id="unitPrice"></div>
+        </li>
+        <li>
+            <div>房型</div>
+            <div id="houseType"></div>
+        </li>
+        <li>
+            <div>面积</div>
+            <div id="houseArea"></div>
+        </li>
+    </ul>
+    <ul class="houseMes2">
+        <li>
+            <div><span>楼层：</span><span id="floor"></span></div>
+            <div><span>朝向：</span><span id="orientation"></span></div>
+        </li>
+        <li>
+            <div><span>装修：</span><span id="fitment"></span></div>
+            <div><span>供暖：</span><span id="heating"></span></div>
+        </li>
+        <li>
+            <div><span>年代：</span><span id="houseYear"></span></div>
+            <div><span>楼型：</span><span id="floorType"></span></div>
+        </li>
+    </ul>
+</section>
+
+<!--经纪人房评-->
+<section class="rentalpart2 public">
+    <h2>经纪人房评</h2>
+    <p id="comment"></p>
+</section>
+
+<!--看房客户记录-->
+<section class="public rentalpart3">
+    <h2>看房客户记录</h2>
+    <p>近一个月新增<span>0</span>位看房客户，共<span>50</span>位</p>
+</section>
+
+
+<!--联系人-->
+<section class=" rentalpart6">
+    <div class="man">
+        <img id="user-img-src" src="" alt=""/>
+        <div>
+            <p id="username"></p>
+            <p id="phone"></p>
+        </div>
+    </div>
+    <div class="phone">
+        <a href="#">致电</a>
+        <a href="#">短信</a>
+    </div>
+</section>
+
+
+<script src="js/rem.js"></script>
+<script>
+    /**
+     *
+     *  获取URL中的参数
+     * */
+    function getUrlParam(url,name){
+        var pattern = new RegExp("[?&]"+name+"\=([^&]+)", "g");
+        var matcher = pattern.exec(url);
+        var items = null;
+        if(null != matcher){
+            try{
+                items = decodeURIComponent(decodeURIComponent(matcher[1]));
+            }catch(e){
+                try{
+                    items = decodeURIComponent(matcher[1]);
+                }catch(e){
+                    items = matcher[1];
+                }
+            }
+        }
+        return items;
+    }
+
+    var id = getUrlParam(location.href , "id");
+    if (id != null) {
+        $.ajax({
+            url: baseUrl + "/tenement/detail/" + id,
+            dataType:"json",
+            success:function (res) {
+                $("#title").html(res.data.title);
+                $("#imgSrc").attr("src" , res.data.imgSrc);
+                $("#unitPrice").html(res.data.unitPrice + "元/平");
+                $("#houseType").html(res.data.houseType);
+                $("#houseArea").html(res.data.houseArea + "平米");
+                $("#floor").html(res.data.floor);
+                $("#orientation").html(res.data.orientation);
+                $("#fitment").html(res.data.fitment);
+                $("#heating").html(res.data.heating);
+                $("#houseYear").html(res.data.houseYear);
+                $("#floorType").html(res.data.floorType);
+                $("#comment").html(res.data.comment);
+                $("#username").html(res.data.createUser.username);
+                $("#phone").html(res.data.createUser.phone);
+                $("#user-img-src").attr("src" , res.data.createUser.imgSrc);
+            },
+            error:function () {
+                alert("错误");
+            }
+        })
+    }
+</script>
+</body>
+</html>
