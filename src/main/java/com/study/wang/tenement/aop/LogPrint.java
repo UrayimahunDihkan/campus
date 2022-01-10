@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
- * @author hsy
+ * @author mitea
  * @version 1.0
- * @date 2019/12/26 15:02
+ * @date 2022/01/10
  */
 @Component
 @Aspect
@@ -41,8 +41,7 @@ public class LogPrint {
     @Pointcut("!(" +
                 "execution(* com.study.wang.tenement.init..*.*(..))" +
                 " || execution(* com.study.wang.tenement.service..*.*(..))" +
-            ") && (execution(* com.study.wang.tenement.controller..*.*(..))" +
-            " || execution(* unicom.mobile.nersu.console.mobileApi..*.*(..)))")
+            ") && (execution(* com.study.wang.tenement.controller..*.*(..)))" )
     public void webLog() {
         // 拦截接口的切面
     }
